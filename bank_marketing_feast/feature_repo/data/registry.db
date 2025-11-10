@@ -1,0 +1,35 @@
+
+K
++
+__dummy"
+__dummy_idJbank_marketing_feast
+ÙéÉÈèÖ ¬ÙéÉÈèÖ ¬
+N
+0
+customer_id"customer_idJbank_marketing_feast
+ëÉÈ€âÂjëÉÈ€âÂj1"$69e744c6-bc5f-4ed7-b996-9d11b3ddb117*ÃìÉÈğßğn2·
+˜
+bank_featuresbank_marketing_feastcustomer_id"
+age"
+balance"
+duration"
+campaign"
+previous"
+job"
+marital"
+	education"
+default"
+housing"
+loan"
+contact"	
+month"
+poutcome:¡event_timestampZdata/bank_marketing.parquetŠ1feast.infra.offline_stores.file_source.FileSource¢data/bank_marketing.parquet’ÃìÉÈ€Û­V"ÃìÉÈ€Û­V@b
+customer_id
+ëÉÈØèÒjÃìÉÈˆ¾ÕlRÆ
+Ã
+,feast.infra.online_stores.sqlite.SqliteTable"’
+l/home/edyn/Escritorio/project_edyN/MLEngineer/mle-III/bank_marketing_feast/feature_repo/data/online_store.db"bank_marketing_feast_bank_featuresb¸event_timestampZdata/bank_marketing.parquetŠ1feast.infra.offline_stores.file_source.FileSource¢data/bank_marketing.parquetªbank_marketing_feast’ëÉÈøò°N"ëÉÈ°ëjz<
+bank_marketing_feast$9e87f78f-6d3f-44e6-8f5b-02d567a51eb7Š5
+
+bank_marketing_feast
+ÙéÉÈˆ·µ¬ÃìÉÈĞôúW
