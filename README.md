@@ -24,35 +24,82 @@ Es un problema de **clasificación binaria** con clases desbalanceadas.
 ```mermaid
 flowchart TD
   A[Raw Bank Marketing Dataset] --> B[Preprocesamiento]
-  B --> C[Feast FileSource]
-  C --> D[Feature Store]
-  D --> E[get_historical_features]
-  E --> F[OneHotEncoder + ColumnTransformer]
-  F --> G[XGBoost]
-  G --> H[MLflow - Tracking & Artifacts]
-  G --> I[Explainability]
-  G --> J[Evidently Performance & Drift Reports]
-  H --> K[Export MLflow metrics -> InfluxDB]
-  J --> L[Export Evidently metrics -> InfluxDB]
+  B --> C[Feature Store]
+  C --> D[get_historical_features]
+  D --> E[ColumnTransformer: StandarScaler + OneHotEncoder]
+  
+  E --> F[LogisticRegression]
+  F --> G[MLflow - Tracking & Artifacts]
+  
+  E --> H[RandomForest]
+  H --> G
+
+  E --> I[XGBoost]
+  I --> G
+
+  I --> J[Interpretability: FeatureImportance + Explainer Local y Global]
+  J --> K[Evidently Drift Reports]
+  
+  K --> L[Export Evidently metrics -> InfluxDB]
   L --> M[Grafana Dashboards]
-  N[FastAPI Serving - opcional] --> D
-``` 
+```
+
+---
+# 2️⃣ Dataset — Descripción y Diccionario de Datos
+
+El dataset proviene de registros de campañas telefónicas para depósitos a plazo [Bank Marketing Dataset](https://www.kaggle.com/datasets/dhirajnirne/bank-marketing)
 
 
+| Variable        | Tipo       | Descripción                |
+| --------------- | ---------- | -------------------------- |
+| age             | numérico   | Edad del cliente           |
+| job             | categórico | Profesión                  |
+| marital         | categórico | Estado civil               |
+| education       | categórico | Nivel educativo            |
+| default         | categórico | Crédito en default         |
+| balance         | numérico   | Balance anual              |
+| housing         | categórico | Tiene hipoteca             |
+| loan            | categórico | Tiene préstamo personal    |
+| contact         | categórico | Tipo de contacto           |
+| month           | categórico | Mes de contacto            |
+| duration        | numérico   | Duración última llamada    |
+| campaign        | numérico   | Nº de contactos campaña    |
+| pdays           | numérico   | Días desde último contacto |
+| previous        | numérico   | Nº contactos previos       |
+| poutcome        | categórico | Resultado previo           |
+| y               | binaria    | Objetivo: `yes` / `no`     |
+| customer_id     | entero     | ID asignado para Feast     |
+| event_timestamp | timestamp  | Timestamp Feast            |
 
-```mermaid
-flowchart TD
-  A[Raw Bank Marketing Dataset] --> B[Preprocesamiento (pandas)]
-  B --> C[Feast FileSource (offline)]
-  C --> D[Feature Store]
-  D --> E[get_historical_features (Train Set)]
-  E --> F[OneHotEncoder + ColumnTransformer]
-  F --> G[XGBoost (Boosting Model)]
-  G --> H[MLflow (DagsHub) - Tracking & Artifacts]
-  G --> I[Explainability (SHAP, Feature Importance)]
-  G --> J[Evidently Performance & Drift Reports]
-  H --> K[Export MLflow metrics -> InfluxDB]
-  J --> L[Export Evidently metrics -> InfluxDB]
-  L --> M[Grafana Dashboards]
-  N[FastAPI Serving - opcional] --> D
- ``` 
+---
+# 3️⃣ Model Card (incluir los otros modelos y conclusión del mejor modelo)
+Inspirado en [Kaggle Model Cards](https://www.kaggle.com/code/var0101/model-cards).
+
+Model Name: XGBoost Gradient Boosting Model  
+Version: 1.0  
+Target: Suscripción bancaría (y)  
+ML Task: Clasificación binaria  
+Feature Source: Feast (offline store, archivo/parquet)  
+Tracking: MLflow (DagsHub)  
+Explainability: SHAP + Feature Importance  
+
+📊 Performance (offline)
+
+| Métrica   | Valor  |
+| --------- | ------ |
+| Accuracy  | `0.91` |
+| Precision | `0.84` |
+| Recall    | `0.78` |
+| F1 Score  | `0.80` |
+| ROC-AUC   | `0.94` |
+---
+# 4️⃣ Resultados
+Entrenamiento con XGBoost usando features generadas por Feast, preprocesadas con OneHotEncoder para las features categóricas y StandardScaler para features numéricas.
+
+📌 Matriz de confusión
+
+![Matriz de confusión](./docs/images/confusion_matrix_XGBClassifier-300.png)
+
+📌 Feature Importance
+
+📌 SHAP Summary Plot
