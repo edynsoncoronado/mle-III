@@ -1,6 +1,6 @@
 # 📈 Bank Marketing — Proyecto (Feast, MLflow, Evidently, InfluxDB, Grafana)
 
-Este repositorio implementa un pipeline completo de *Machine Learning* aplicando el dataset **Bank Marketing**, integrando:
+Este repositorio implementa técnicas avanzadas en el entrenamiento de modelos de *Machine Learning* especializada en el monitoreo e interpretabilidad aplicado al dataset **Bank Marketing**, integrando:
 
 - Procesamiento y Feature Engineering  
 - Feature Store con **Feast**
@@ -72,7 +72,7 @@ El dataset proviene de registros de campañas telefónicas para depósitos a pla
 | event_timestamp | timestamp  | Timestamp Feast            |
 
 ---
-# 3️⃣ Model Card (incluir los otros modelos y conclusión del mejor modelo)
+# 3️⃣ Model Card
 Inspirado en [Kaggle Model Cards](https://www.kaggle.com/code/var0101/model-cards).
 
 **Model Name**: XGBoost Gradient Boosting Model  
@@ -83,7 +83,7 @@ Inspirado en [Kaggle Model Cards](https://www.kaggle.com/code/var0101/model-card
 **Tracking**: MLflow (DagsHub)  
 **Interpretability**: SHAP + Feature Importance  
 
-📊 Performance (offline)
+📊 Performance (Incluído los otros modelos y conclusión del mejor modelo)
 ![Métricas](./docs/images/metrics_x_models.png)
 
 - XGBoost obtiene el mejor desempeño para la clase positiva, especialmente en recall y F1-score.
@@ -94,8 +94,6 @@ Inspirado en [Kaggle Model Cards](https://www.kaggle.com/code/var0101/model-card
   - Mejor F1-score de la clase 1
 
   - Mejor macro avg (equilibrio entre clases)
-
-  - Mejor weighted avg
 
   Esto significa:
 
@@ -190,18 +188,23 @@ Los SHAP force plots permiten ver que:
 
 - Feast simplifica la gestión coherente de features.
 
-- XGBoost mostró mejor rendimiento que modelos lineales o Random Forest.
-
 - Evidently permite detectar drift temprano, clave en marketing donde los patrones cambian rápido.
 
 - InfluxDB + Grafana ofrecen dashboards realtime sin overhead.
 
 - La campaña telefónica tiene baja tasa de conversión, y los modelos lo reflejan.
 
-- ⭐ 4. XGBoost es el mejor modelo del estudio
+- ⭐ XGBoost es el mejor modelo del estudio:
 
   - Su capacidad para manejar relaciones no lineales
 
   - Su manejo nativo de boosting
 
   - Y su robustez con desbalanceos le permiten captar mejor los patrones sutiles del dataset.
+
+  ---
+
+## Autor
+
+Edynson Coronado Icochea 
+[LinkedIn](https://www.linkedin.com/in/edynson-coronado-icochea/)
